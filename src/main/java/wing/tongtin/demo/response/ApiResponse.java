@@ -1,4 +1,5 @@
-package wing.tongtin.demo.request;
+package wing.tongtin.demo.response;
+
 
 import lombok.*;
 

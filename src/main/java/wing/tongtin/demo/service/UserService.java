@@ -1,6 +1,5 @@
 package wing.tongtin.demo.service;
 
-import org.apache.catalina.User;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import wing.tongtin.demo.entity.UserEntity;
 import wing.tongtin.demo.repository.UserRepository;
@@ -17,6 +16,10 @@ public class UserService {
     private final BCryptPasswordEncoder passwordEncoder;
 
     public UserEntity register(RegisterRequest request) {
+        if (userRepository.findByPhone(request.getPhone()).isPresent()) {
+            throw new RuntimeException("User with this phone number already exists");
+        }
+
         String hashedPassword = passwordEncoder.encode(request.getPassword());
         UserEntity user = UserEntity.builder()
                 .fullName(request.getFullName())

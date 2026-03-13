@@ -7,6 +7,8 @@ import wing.tongtin.demo.request.CreateGroupRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class TontineService {
@@ -23,6 +25,11 @@ public class TontineService {
                 .build();
 
         return groupRepository.save(group);
+    }
+
+
+    public List<TontineGroup> getAllGroupListing() {
+        return groupRepository.findAll();
     }
 
 }

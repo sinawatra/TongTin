@@ -7,7 +7,6 @@ import java.math.BigDecimal;
 
 @Data
 public class CreateGroupRequest {
-
     private String groupName;
     private BigDecimal contributionAmount;
     private Integer totalMembers;

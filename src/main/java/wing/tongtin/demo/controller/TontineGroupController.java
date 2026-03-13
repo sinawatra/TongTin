@@ -22,4 +22,16 @@ public class TontineGroupController {
                 .build();
     }
 
+
+    @GetMapping
+    public  ApiResponse<?> getGroupListing() {
+
+        return ApiResponse.builder()
+                .success(true)
+                .message("Sucess")
+                .data(tontineService.getAllGroupListing())
+                .build();
+
+    }
+
 }

@@ -103,4 +103,13 @@ public class TontineGroupController {
                 .build();
     }
 
+    @GetMapping("/{groupId}/payouts")
+    public ApiResponse<?> getGroupPayouts(@PathVariable String groupId) {
+        return ApiResponse.builder()
+                .success(true)
+                .message("Success")
+                .data(contributionService.getGroupPayouts(groupId))
+                .build();
+    }
+
 }

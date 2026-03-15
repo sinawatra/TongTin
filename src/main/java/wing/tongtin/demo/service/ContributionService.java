@@ -151,4 +151,20 @@ public class ContributionService {
 
         return savedPayout;
     }
+
+    public List<PayoutEntity> getGroupPayouts(String groupId) {
+        // Verify group exists
+        groupRepository.findById(groupId)
+                .orElseThrow(() -> new RuntimeException("Group not found with id: " + groupId));
+
+        return payoutRepository.findByGroupId(groupId);
+    }
+
+    public List<PayoutEntity> getUserPayouts(String userId) {
+        // Verify user exists
+        userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found with id: " + userId));
+
+        return payoutRepository.findByRecipientId(userId);
+    }
 }

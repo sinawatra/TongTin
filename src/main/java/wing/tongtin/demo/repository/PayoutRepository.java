@@ -10,6 +10,8 @@ public interface PayoutRepository extends JpaRepository<PayoutEntity, String> {
 
     List<PayoutEntity> findByGroupId(String groupId);
 
+    List<PayoutEntity> findByRecipientId(String recipientId);
+
     Optional<PayoutEntity> findByGroupIdAndCycleNumber(String groupId, Integer cycleNumber);
 
     int countByGroupId(String groupId);

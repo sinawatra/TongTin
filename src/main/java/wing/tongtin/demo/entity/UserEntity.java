@@ -26,6 +26,8 @@ public class UserEntity {
     private String password;
 
     private Boolean kycVerified;
+
+    private Long balance;
 }
 
 

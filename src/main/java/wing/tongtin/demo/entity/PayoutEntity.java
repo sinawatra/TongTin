@@ -8,31 +8,31 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "contributions")
+@Table(name = "payouts")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ContributionEntity extends BaseEntity {
+public class PayoutEntity extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private UserEntity user;
+    @JoinColumn(name = "recipient_id", referencedColumnName = "id")
+    private UserEntity recipient;
 
     @ManyToOne
     @JoinColumn(name = "group_id", referencedColumnName = "id")
     private TontineGroupEntity group;
 
-    private BigDecimal amount;
-
     private Integer cycleNumber;
 
+    private BigDecimal amount;
+
     @Enumerated(EnumType.STRING)
-    private PaymentStatus paymentStatus;
+    private PaymentStatus status;
 
     private LocalDateTime paidAt;
 }

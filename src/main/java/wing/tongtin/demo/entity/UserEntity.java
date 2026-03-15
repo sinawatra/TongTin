@@ -3,6 +3,7 @@ package wing.tongtin.demo.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import wing.tongtin.demo.enumeration.Role;
 
 @Entity
 @Table(name = "users")
@@ -28,6 +29,10 @@ public class UserEntity {
     private Boolean kycVerified;
 
     private Long balance;
+
+    @Enumerated(EnumType.STRING)
+    @Builder.Default
+    private Role role = Role.USER;
 }
 
 

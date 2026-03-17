@@ -28,7 +28,7 @@ public class TontineService {
                 .groupName(request.getGroupName())
                 .contributionAmount(request.getContributionAmount())
                 .totalMembers(request.getTotalMembers())
-                .status(GroupStatus.PENDING)
+                .status(GroupStatus.ACTIVE)
                 .imageUrl(request.getImageUrl())
                 .build();
 

@@ -30,6 +30,8 @@ public class UserEntity {
 
     private Long balance;
 
+    private String imageUrl;
+
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private Role role = Role.USER;

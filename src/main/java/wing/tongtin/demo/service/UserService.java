@@ -25,6 +25,7 @@ public class UserService {
                 .fullName(request.getFullName())
                 .phone(request.getPhone())
                 .password(hashedPassword)
+                .imageUrl(request.getImageUrl())
                 .kycVerified(false)
                 .build();
 

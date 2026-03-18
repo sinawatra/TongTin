@@ -7,6 +7,8 @@ import wing.tongtin.demo.request.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+
 
 @Service
 @RequiredArgsConstructor
@@ -36,5 +38,22 @@ public class UserService {
         return userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
+
+    public UserEntity addMoney(String userId, BigDecimal amount) {
+        if (amount.compareTo(BigDecimal.ZERO) <= 0) {
+            throw new RuntimeException("Amount must be greater than 0");
+        }
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        if (user.getBalance() == null) {
+            user.setBalance(BigDecimal.ZERO);
+        }
+
+        user.setBalance(user.getBalance().add(amount));
+        return userRepository.save(user);
+    }
+
+
 
 }

@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import wing.tongtin.demo.enumeration.Role;
 
+import java.math.BigDecimal;
+
 @Entity
 @Table(name = "users")
 @Getter
@@ -28,7 +30,7 @@ public class UserEntity {
 
     private Boolean kycVerified;
 
-    private Long balance;
+    private BigDecimal balance;
 
     private String imageUrl;
 

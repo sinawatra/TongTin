@@ -10,6 +10,9 @@ import wing.tongtin.demo.repository.UserRepository;
 import wing.tongtin.demo.request.KycReviewRequest;
 import wing.tongtin.demo.response.ApiResponse;
 import wing.tongtin.demo.service.KycService;
+import wing.tongtin.demo.service.UserService;
+
+import java.math.BigDecimal;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,6 +24,7 @@ public class AdminController {
     private final ContributionRepository contributionRepository;
     private final UserRepository userRepository;
     private final KycService kycService;
+    private final UserService userService;
 
     @GetMapping("/groups")
     public ApiResponse<?> getAllGroups() {
@@ -96,6 +100,19 @@ public class AdminController {
                 .success(true)
                 .message("All KYC documents approved successfully")
                 .data(kycService.approveAllUserKyc(userId, adminId))
+                .build();
+    }
+
+    @PutMapping("/deposit/{userId}")
+    public ApiResponse<?> depositMoney(
+            @PathVariable String userId,
+            @RequestBody BigDecimal amount,
+            @AuthenticationPrincipal String adminId
+    ) {
+        return ApiResponse.builder()
+                .success(true)
+                .message("Successfully deposit into account")
+                .data(userService.addMoney(userId, amount))
                 .build();
     }
 }

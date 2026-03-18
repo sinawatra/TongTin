@@ -7,12 +7,11 @@ import org.springframework.web.bind.annotation.*;
 import wing.tongtin.demo.repository.ContributionRepository;
 import wing.tongtin.demo.repository.TontineGroupRepository;
 import wing.tongtin.demo.repository.UserRepository;
+import wing.tongtin.demo.request.DepositRequest;
 import wing.tongtin.demo.request.KycReviewRequest;
 import wing.tongtin.demo.response.ApiResponse;
 import wing.tongtin.demo.service.KycService;
 import wing.tongtin.demo.service.UserService;
-
-import java.math.BigDecimal;
 
 @RestController
 @RequiredArgsConstructor
@@ -106,13 +105,13 @@ public class AdminController {
     @PutMapping("/deposit/{userId}")
     public ApiResponse<?> depositMoney(
             @PathVariable String userId,
-            @RequestBody BigDecimal amount,
+            @RequestBody DepositRequest request,
             @AuthenticationPrincipal String adminId
     ) {
         return ApiResponse.builder()
                 .success(true)
                 .message("Successfully deposit into account")
-                .data(userService.addMoney(userId, amount))
+                .data(userService.addMoney(userId, request.getAmount()))
                 .build();
     }
 }

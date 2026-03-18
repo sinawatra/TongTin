@@ -87,4 +87,15 @@ public class AdminController {
                 .data(kycService.reviewKycDocument(kycId, adminId, request))
                 .build();
     }
+
+    @PutMapping("/kyc/user/{userId}/approve-all")
+    public ApiResponse<?> approveAllUserKyc(
+            @PathVariable String userId,
+            @AuthenticationPrincipal String adminId) {
+        return ApiResponse.builder()
+                .success(true)
+                .message("All KYC documents approved successfully")
+                .data(kycService.approveAllUserKyc(userId, adminId))
+                .build();
+    }
 }

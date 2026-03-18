@@ -120,4 +120,34 @@ public class KycService {
                 .orElseThrow(() -> new RuntimeException("KYC document not found"));
         return KycResponse.fromEntity(kyc);
     }
+
+    @Transactional
+    public List<KycResponse> approveAllUserKyc(String userId, String adminId) {
+        UserEntity user = userRepository.findById(userId)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+
+        List<KycEntity> pendingDocuments = kycRepository.findByUser(user).stream()
+                .filter(doc -> doc.getStatus() == KycStatus.PENDING)
+                .collect(Collectors.toList());
+
+        if (pendingDocuments.isEmpty()) {
+            throw new RuntimeException("No pending KYC documents found for this user");
+        }
+
+        LocalDateTime now = LocalDateTime.now();
+        for (KycEntity kyc : pendingDocuments) {
+            kyc.setStatus(KycStatus.APPROVED);
+            kyc.setReviewedBy(adminId);
+            kyc.setReviewedAt(now);
+            kycRepository.save(kyc);
+        }
+
+        // Set user as KYC verified
+        user.setKycVerified(true);
+        userRepository.save(user);
+
+        return pendingDocuments.stream()
+                .map(KycResponse::fromEntity)
+                .collect(Collectors.toList());
+    }
 }

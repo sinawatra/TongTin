@@ -20,4 +20,6 @@ public interface KycRepository extends JpaRepository<KycEntity, String> {
     Optional<KycEntity> findByUserAndType(UserEntity user, KycDocumentType type);
 
     boolean existsByUserAndType(UserEntity user, KycDocumentType type);
+
+    long countByStatus(KycStatus status);
 }

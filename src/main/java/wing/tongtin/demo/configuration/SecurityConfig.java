@@ -38,7 +38,8 @@ public class SecurityConfig {
                 "http://localhost:5173",
                 "http://localhost:3000",
                 "https://tong-tin-admin.vercel.app",
-                "https://tong-tin-admin.vercel.app/login"
+                "https://tong-tin-admin.vercel.app/login",
+                "https://comely-asha-prolix.ngrok-free.dev"
         ));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
